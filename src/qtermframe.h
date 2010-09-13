@@ -43,16 +43,15 @@ public:
     void buzz();
     QMenu * genPopupMenu(QWidget * owner);
     bool showMessage(const QString & title, const QString & message, int millisecondsTimeoutHint = 10000);
+    void autoConnectOnStartUp();
 
 public slots:
     bool confirmExitQTerm();
     void saveAndDisconnect();
-
 signals:
     void bossColor();
     void scrollChanged();
     void statusBarChanged(bool);
-
 protected slots:
     void keyClicked(int);
     // Menu
@@ -73,6 +72,7 @@ protected slots:
     // Toolbar
     void connectIt();
     void disconnect();
+    void disconnectAll();
     void copy();
     void paste();
     void copyRect(bool);
@@ -142,6 +142,7 @@ protected:
 //  File
     QAction * m_connectAction;
     QAction * m_disconnectAction;
+    QAction * m_disconnectAllAction;
     QAction * m_addressAction;
     QAction * m_quickConnectAction;
     QAction * m_printAction;
@@ -217,7 +218,7 @@ protected:
     void closeEvent(QCloseEvent *);
     void keyPressEvent(QKeyEvent *);
     void mouseReleaseEvent(QMouseEvent *);
-    void selectStyleMenu(int , int);
+    void selectStyleMenu(int, int);
     void iniSetting();
     void initActions();
     void initShortcuts();
@@ -239,6 +240,7 @@ protected:
 private:
     static Frame * s_instance;
 };
+
 
 } // namespace QTerm
 

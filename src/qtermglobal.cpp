@@ -164,6 +164,8 @@ bool Global::loadAddress(int n, Param& param)
     param.m_uPort = strTmp.toUShort();
     strTmp = m_address->getItemValue(strSection, "hosttype").toString();
     param.m_nHostType = strTmp.toInt();
+    strTmp = m_address->getItemValue(strSection, "autoconnect").toString();
+    param.m_bAutoConnect = (strTmp != "0");
     strTmp = m_address->getItemValue(strSection, "autologin").toString();
     param.m_bAutoLogin = (strTmp != "0");
     param.m_strPreLogin = m_address->getItemValue(strSection, "prelogin").toString();
@@ -354,6 +356,12 @@ void Global::removeAddress(int n)
     m_address->deleteSection(strSection);
 }
 
+int Global::addressNum() const
+{
+    QString strTmp = m_address->getItemValue("bbs list", "num").toString();
+    return strTmp.toInt();
+}
+
 void Global::loadPrefence()
 {
     QString strTmp;
@@ -393,6 +401,9 @@ void Global::loadPrefence()
         m_pref.strZmPath.append('/');
     strTmp = m_config->getItemValue("preference", "image").toString();
     m_pref.strImageViewer = strTmp;
+
+    strTmp = m_config->getItemValue("preference", "autoconnect").toString();
+    m_pref.bAutoConnect = (strTmp != "0");
 }
 
 QString Global::getOpenFileName(const QString & filter, QWidget * widget)
