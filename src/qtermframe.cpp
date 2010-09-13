@@ -479,9 +479,23 @@ void Frame::connectIt()
         if (!wndmgr->activeWindow()->isConnected())
             wndmgr->activeWindow()->reconnect();
 }
+
 void Frame::disconnect()
 {
     wndmgr->activeWindow()->disconnect();
+}
+
+void Frame::disconnectAll()
+{
+    while ( wndmgr->count() > 0)
+    {
+        Window * active_window = wndmgr->activeWindow();
+        active_window->disconnect();
+        wndmgr->activeNextPrev(true);
+        wndmgr->removeWindow(active_window);
+    }
+
+    exitQTerm();
 }
 
 void Frame::copy()
@@ -878,6 +892,10 @@ void Frame::initActions()
     m_connectAction->setObjectName("actionConnect");
     m_disconnectAction = new QAction(QPixmap(pathLib + "pic/disconnect.png"), tr("&Disconnect"), this);
     m_disconnectAction->setObjectName("actionDisconnect");
+
+    m_disconnectAllAction = new QAction(QPixmap(pathLib + "pic/disconnect.png"), tr("&DisconnectAll"), this);
+    m_disconnectAllAction->setObjectName("actionDisconnectAll");
+
     m_addressAction = new QAction(QPixmap(pathLib + "pic/addr.png"), tr("&Address Book..."), this);
     m_addressAction->setObjectName("actionAddress");
     m_quickConnectAction = new QAction(QPixmap(pathLib + "pic/quick.png"), tr("&Quick Login..."), this);
@@ -1048,6 +1066,7 @@ void Frame::initActions()
 
     connect(m_connectAction, SIGNAL(triggered()), this, SLOT(connectIt()));
     connect(m_disconnectAction, SIGNAL(triggered()), this, SLOT(disconnect()));
+    connect(m_disconnectAllAction, SIGNAL(triggered()), this, SLOT(disconnectAll()));
     connect(m_addressAction, SIGNAL(triggered()), this, SLOT(addressBook()));
     connect(m_quickConnectAction, SIGNAL(triggered()), this, SLOT(quickLogin()));
     connect(m_printAction, SIGNAL(triggered()), this, SLOT(printScreen()));
@@ -1110,6 +1129,7 @@ void Frame::addMainMenu()
     QMenu * file = mainMenu->addMenu(tr("File"));
     file->addAction(m_connectAction);
     file->addAction(m_disconnectAction);
+    file->addAction(m_disconnectAllAction);
 
     file->addSeparator();
     file->addAction(m_addressAction);
@@ -1577,6 +1597,28 @@ void Frame::configToolbars()
 void Frame::slotShowQTerm()
 {
     popupFocusIn(NULL);
+}
+
+void Frame::autoConnectOnStartUp()
+{
+    bool isAutoConnectedEnabled = Global::instance()->m_pref.bAutoConnect;
+    if ( ! isAutoConnectedEnabled )
+    {
+        return;
+    }
+    else
+    {
+        for (unsigned index = 0; index < Global::instance()->addressNum(); index++)
+        {
+            Param param;
+            bool flag = Global::instance()->loadAddress(index, param);
+            if ( flag && param.m_bAutoConnect )
+            {
+                newWindow( param, index);
+            }
+        }
+    }
+
 }
 
 }

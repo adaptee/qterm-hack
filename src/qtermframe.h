@@ -42,11 +42,11 @@ public:
     void popupFocusIn(Window * window = 0);
     void buzz();
     QMenu * genPopupMenu(QWidget * owner);
+    void autoConnectOnStartUp();
 signals:
     void bossColor();
     void scrollChanged();
     void statusBarChanged(bool);
-
 protected slots:
     void keyClicked(int);
     // Menu
@@ -68,6 +68,7 @@ protected slots:
     // Toolbar
     void connectIt();
     void disconnect();
+    void disconnectAll();
     void copy();
     void paste();
     void copyRect(bool);
@@ -138,6 +139,7 @@ protected:
 //  File
     QAction * m_connectAction;
     QAction * m_disconnectAction;
+    QAction * m_disconnectAllAction;
     QAction * m_addressAction;
     QAction * m_quickConnectAction;
     QAction * m_printAction;
@@ -234,6 +236,7 @@ protected:
 private:
     static Frame * s_instance;
 };
+
 
 } // namespace QTerm
 

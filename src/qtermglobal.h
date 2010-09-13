@@ -66,6 +66,7 @@ public:
         QString strZmPath;
         QString strPoolPath;
         QString strImageViewer;
+        bool bAutoConnect;
     };
     static Global * instance();
     Config * fileCfg();
@@ -115,6 +116,7 @@ public:
     void cleanup();
     void openUrl(const QString & url);
     QString convert(const QString & source, Conversion flag);
+    int addressNum() const ;
 
 private:
     Global();

@@ -17,6 +17,7 @@ Param::Param()
 	m_strAddr = "smth.org";
 	m_uPort = 23;
 	m_nHostType = 0;		// 0--BBS 1--*NIX	
+        m_bAutoConnect = false;
 	m_bAutoLogin = false;
 	m_strPreLogin = "";
 	m_strUser = "";
@@ -70,6 +71,7 @@ Param::Param( const Param & param )
 	m_strAddr = param.m_strAddr;
 	m_uPort = param.m_uPort;
 	m_nHostType = param.m_nHostType; // 0--BBS 1--*NIX
+        m_bAutoConnect = param.m_bAutoConnect;
 	m_bAutoLogin = param.m_bAutoLogin;
 	m_strPreLogin = param.m_strPreLogin;
 	m_strUser = param.m_strUser;
