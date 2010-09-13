@@ -28,6 +28,8 @@ public:
 	quint16 m_uPort;
 	// Host Type	
 	int m_nHostType;	// 0--BBS 1--*NIX
+	// Auto connect
+	bool m_bAutoConnect;
 	// Auto Login
 	bool m_bAutoLogin;
 	// Pre Login
