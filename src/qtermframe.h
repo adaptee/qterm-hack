@@ -45,6 +45,7 @@ public:
 
 public slots:
     bool confirmExitQTerm();
+    bool quickExitQTerm();
     void saveAndDisconnect();
 
 signals:

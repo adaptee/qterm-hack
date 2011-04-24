@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>674</width>
-    <height>393</height>
+    <height>660</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,7 +27,7 @@
      <x>0</x>
      <y>0</y>
      <width>674</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -48,6 +48,7 @@
     <addaction name="actionPrint_Preview"/>
     <addaction name="actionPrint"/>
     <addaction name="actionQuit"/>
+    <addaction name="actionQuickQuit"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -265,8 +266,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>60</width>
-          <height>270</height>
+          <width>75</width>
+          <height>538</height>
          </rect>
         </property>
        </widget>
@@ -801,6 +802,20 @@
    </property>
    <property name="toolTip">
     <string>Blink</string>
+   </property>
+  </action>
+  <action name="actionQuickQuit">
+   <property name="text">
+    <string>&amp;Quick Quit</string>
+   </property>
+   <property name="iconText">
+    <string>Quick Quit</string>
+   </property>
+   <property name="toolTip">
+    <string>Quick Quit</string>
+   </property>
+   <property name="whatsThis">
+    <string>This works like 'Quit', but does not bothering confimation.</string>
    </property>
   </action>
  </widget>

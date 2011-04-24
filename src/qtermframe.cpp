@@ -148,6 +148,9 @@ Frame::Frame()
     connect(actionQuit, SIGNAL(triggered()), 
             this, SLOT(confirmExitQTerm()));
 
+    connect(actionQuickQuit, SIGNAL(triggered()), 
+            this, SLOT(quickExitQTerm()));
+
     connectMenu = new QMenu(this);
     QToolButton * connectButton = qobject_cast<QToolButton *> (terminalToolBar->widgetForAction(actionConnect));
     connectButton->setObjectName("buttonConnect");
@@ -284,7 +287,7 @@ void Frame::on_actionQuick_Login_triggered()
     }
 }
 
-//quit
+
 bool Frame::confirmExitQTerm()
 {
     QList<QVariant> sites;
@@ -310,6 +313,18 @@ bool Frame::confirmExitQTerm()
     // We should never reach here;
     return true;
 }
+
+//quit, without asking
+bool Frame::quickExitQTerm()
+{
+    saveAndDisconnect();
+
+    setUseTray(false);
+    qApp->quit();
+    // We should never reach here;
+    return true;
+}
+
 void Frame::saveAndDisconnect()
 {
     QList<QVariant> sites;
@@ -1177,7 +1192,7 @@ void Frame::groupActions()
     // These are actions which are enabled without any subwindow
     listBasicActions 
         << "actionNew_Console" << "actionConnect"
-        << "actionQuick_Login" << "actionAddressBook"  << "actionQuit"
+        << "actionQuick_Login" << "actionAddressBook"  << "actionQuit" << "actionQuickQuit"
         << "actionNew_ANSI"     << "actionOpen_ANSI"
         << "actionFont" << "actionStatusbar" << "actionMenubar" << "actionFullscreen"
         << "actionImage_Viewer"
