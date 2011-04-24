@@ -75,6 +75,7 @@ public:
         QString strZmPath;
         QString strPoolPath;
         QString strImageViewer;
+        bool bAutoConnectOnStartUp;
     };
     static Global * instance();
     Config * fileCfg();

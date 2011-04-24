@@ -152,6 +152,7 @@ int main( int argc, char ** argv )
     mw->setWindowTitle( "QTerm "+QString(QTERM_VERSION) );
     mw->setWindowIcon( QIcon(":/pic/qterm.png") );
     mw->show();
+    mw->autoConnectOnStartup();
     a.connect( &a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()) );
     a.connect( &a, SIGNAL(commitDataRequest(QSessionManager &)), mw, SLOT(saveAndDisconnect()), Qt::DirectConnection);
     int res = a.exec();

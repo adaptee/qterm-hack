@@ -332,6 +332,7 @@ void Global::loadPrefence()
     m_pref.strPlayer = m_config->getItemValue("preference", "externalplayer").toString();
     m_pref.strImageViewer = m_config->getItemValue("preference", "image").toString();
     m_pref.bClearPool = m_config->getItemValue("preference", "clearpool").toBool();
+    m_pref.bAutoConnectOnStartUp = m_config->getItemValue("preference", "autoconnect").toBool();
 
     strTmp = m_config->getItemValue("preference", "pool").toString();
     m_pref.strPoolPath = strTmp.isEmpty() ? Global::instance()->pathCfg() + "pool/" : strTmp;

@@ -43,6 +43,8 @@ public:
     QMenu * genPopupMenu(QWidget * owner);
     bool showMessage(const QString & title, const QString & message, int millisecondsTimeoutHint = 10000);
 
+    void autoConnectOnStartup();
+
 public slots:
     bool confirmExitQTerm();
     bool quickExitQTerm();

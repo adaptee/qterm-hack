@@ -1255,6 +1255,25 @@ void Frame::updateTabBar()
     }
 }
 
+void Frame::autoConnectOnStartup()
+{
+    bool enabled = Global::instance()->m_pref.bAutoConnectOnStartUp;
+
+    if(enabled)
+    {
+        QMap<QString,QString> favoritelist = \
+            Global::instance()->loadFavoriteList(Global::instance()->addrXml()) ;
+
+        QMapIterator<QString,QString> iter(favoritelist);
+        while (iter.hasNext())
+        {
+            iter.next();
+            QString uuid = iter.key() ;
+            connectMenuActivated(uuid);
+        }
+    }
+}
+
 }
 
 #include <qtermframe.moc>
